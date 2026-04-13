@@ -20,3 +20,12 @@ function deleteTask(id) {
 function getTasks() {
     return tasks;
 }
+function editTask(id, newText) {
+    tasks = tasks.map(task => {
+        if (task.id === id) {
+            return { ...task, text: newText };
+        }
+        return task;
+    });
+    return tasks;
+}

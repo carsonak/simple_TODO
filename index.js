@@ -22,6 +22,7 @@ function renderTasks() {
 
         li.innerHTML = `
             ${task.text}
+            <button onclick="handleEdit(${task.id})">Edit</button>
             <button onclick="removeTask(${task.id})">Delete</button>
         `;
 
@@ -32,4 +33,11 @@ function renderTasks() {
 function removeTask(id) {
     deleteTask(id);
     renderTasks();
+}
+function handleEdit(id) {
+    const newText = prompt("Edit your task");
+    if ((newText && newText.trim() !== "")) {
+        editTask(id, newText); // from app.js
+        renderTasks();
+    }
 }
