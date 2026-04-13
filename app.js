@@ -1,31 +1,39 @@
-// app.js
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-let tasks = [];
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
 function addTask(text) {
-    const task = {
-        id: Date.now(),
-        text: text
-    };
+  const task = {
+    id: Date.now(),
+    text: text,
+  };
 
-    tasks.push(task);
-    return tasks;
+  tasks.push(task);
+  saveTasks();
+  return tasks;
 }
 
 function deleteTask(id) {
-    tasks = tasks.filter(task => task.id !== id);
-    return tasks;
+  tasks = tasks.filter((task) => task.id !== id);
+  saveTasks();
+  return tasks;
 }
 
 function getTasks() {
-    return tasks;
+  return tasks;
 }
+
 function editTask(id, newText) {
-    tasks = tasks.map(task => {
-        if (task.id === id) {
-            return { ...task, text: newText };
-        }
-        return task;
-    });
-    return tasks;
+  tasks = tasks.map((task) => {
+    if (task.id === id) {
+      return { ...task, text: newText };
+    }
+
+    return task;
+  });
+
+  saveTasks();
+  return tasks;
 }
