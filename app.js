@@ -8,6 +8,7 @@ function addTask(text) {
   const task = {
     id: Date.now(),
     text: text,
+    status: "not_started"
   };
 
   tasks.push(task);
@@ -36,4 +37,19 @@ function editTask(id, newText) {
 
   saveTasks();
   return tasks;
+}
+
+function updateTaskStatus(id, status) {
+    tasks = tasks.map(task => {
+        if (task.id === id) {
+            return {
+                ...task,
+                status: status
+            };
+        }
+        return task;
+    });
+
+  saveTasks();
+    return tasks;
 }
